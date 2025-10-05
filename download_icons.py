@@ -64,7 +64,10 @@ for icon in icons:
     if response.status_code == 200:
         white_svg = make_icon_white(response.text)
 
-        with open(f"assets/icons/{icon}", "w", encoding="utf-8") as f:
+        # Ensure file ends with exactly one newline
+        white_svg = white_svg.rstrip() + "\n"
+
+        with open(f"assets/icons/{icon}", "w", encoding="utf-8", newline="\n") as f:
             f.write(white_svg)
         print(f"✓ Downloaded and converted {icon} to white")
     else:
